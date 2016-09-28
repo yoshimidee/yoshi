@@ -1,0 +1,513 @@
+
+<!DOCTYPE html>
+<!--
+########################
+######### Yoshi ########
+########################
+-->
+
+   <head>
+     <title>Yoshi Animate</title>
+
+      <style> 
+        body {
+			margin: 0px;
+			padding: 0px;
+			background-color: #000;
+		}
+		.canvasWrapper {
+			position: absolute;
+			border:1px solid #fff;
+		}
+		.canvasContainer {
+			margin:20px auto;
+			width:1200px;
+		}
+		.canvasWrapper.headerWhite {
+			z-index: 50;
+		}
+		.canvasWrapper.headerBlack {
+			z-index: 50;
+		}
+		.canvasWrapper.blue {
+			z-index: 100;
+		}
+		.canvasWrapper.yellow {
+			z-index: 75;
+		}
+		.canvasWrapper.green {
+			z-index: 50;
+		}
+		.canvasWrapper.pink {
+			z-index: 10;
+		}
+		.canvasWrapper.black {
+			z-index: 25;
+		}
+		
+      </style>
+   </head>
+
+	<body>
+		<div class="canvasContainer">
+
+			<div class="canvasWrapper">
+				<canvas id="mainCanvas" width="1200" height="600"></canvas>
+			</div>
+			<div class="canvasWrapper blue">
+				<canvas id="blueCircleCanvas" width="1200" height="600"></canvas>
+			</div>
+			<div class="canvasWrapper yellow">
+				<canvas id="yellowCircleCanvas" width="1200" height="600"></canvas>
+			</div>
+			<div class="canvasWrapper pink">
+				<canvas id="pinkCircleCanvas" width="1200" height="600"></canvas>
+			</div>
+			<div class="canvasWrapper green">
+				<canvas id="greenCircleCanvas" width="1200" height="600"></canvas>
+			</div>
+			<div class="canvasWrapper black">
+				<canvas id="blackCircleCanvas" width="1200" height="600"></canvas>
+			</div>
+			<div class="canvasWrapper headerWhite">
+				<canvas id="headerWhiteCanvas" width="1200" height="600"></canvas>
+			</div>
+			<div class="canvasWrapper headerBlack">
+				<canvas id="headerBlackCanvas" width="1200" height="600"></canvas>
+			</div>
+
+		</div>
+		<script>
+
+
+			//////////////////////////////////////////CANVAS headerWhite////////////////////////////////////////////////
+			
+			var headerWhiteCanvas = document.getElementById('headerWhiteCanvas');
+			var headerWhiteConText = headerWhiteCanvas.getContext('2d');
+
+			////////Create Yoshimi headerWhite
+			headerWhiteConText.font = '40pt Calibri';
+			headerWhiteConText.fillStyle = '#fff';
+			headerWhiteConText.fillText('Yoshi', 150, 100);
+
+			////////Create Digital Media headerWhite
+			headerWhiteConText.font = '15pt Calibri';
+			headerWhiteConText.fillStyle = '#fff';
+			headerWhiteConText.fillText('Animate', 150, 130);
+
+			/*/////////////////////////////////////////CANVAS headerBlack////////////////////////////////////////////////
+			
+			var headerBlackCanvas = document.getElementById('headerBlackCanvas');
+			var headerBlackConText = headerBlackCanvas.getContext('2d');
+
+			////////Create Yoshimi headerBlack
+			headerBlackConText.font = '40pt Calibri';
+			headerBlackConText.fillStyle = '#000';
+			headerBlackConText.fillText('Yoshimi', 150, 100);
+
+			////////Create Digital Media headerBlack
+			headerBlackConText.font = '15pt Calibri';
+			headerBlackConText.fillStyle = '#000';
+			headerBlackConText.fillText('Digital Media', 150, 130);
+
+
+
+
+			/*/////////////////////////////////////////CANVAS Main////////////////////////////////////////////////
+
+			////Set main CANVAS and CONTEXT variable hooks
+			var mainCanvas = document.getElementById('mainCanvas');
+			var mainContext = mainCanvas.getContext('2d');
+
+			//Load images in first:
+			function loadImages(sources, callback) {
+				var images = {};
+				var loadedImages = 0;
+				var numImages = 0;
+				// get num of sources
+				for(var src in sources) {
+					numImages++;
+				}
+				for(var src in sources) {
+					images[src] = new Image();
+					images[src].onload = function() {
+						if(++loadedImages >= numImages) {
+						callback(images);
+						}
+					};
+					images[src].src = sources[src];
+				}
+			}
+
+			var sources = {
+				darthVader: 'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg',
+				yoda: 'http://www.html5canvastutorials.com/demos/assets/yoda.jpg'
+			};
+
+			loadImages(sources, function(images) {
+				//mainContext.drawImage(images.darthVader, 100, 30, 200, 137);
+				//mainContext.drawImage(images.yoda, 350, 55, 93, 104);
+			});
+
+			////////Create background gradient
+			mainContext.rect(0, 0, mainCanvas.width, mainCanvas.height);
+			// create radial gradient
+			var grd = mainContext.createRadialGradient(238, 50, 10, 238, 50, 300);
+			// light blue
+			grd.addColorStop(0, '#ffffff');
+			// dark blue
+			grd.addColorStop(1, '#f4f4f4');
+			mainContext.fillStyle = grd;
+			mainContext.fill();
+
+			window.requestAnimFrame = (function(callback) {
+				return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame ||
+				function(callback) {
+				window.setTimeout(callback, 1000 / 60);
+				};
+			})();
+
+			////////FUNCTION - Draw a circle in mainContext
+			function drawCircleMainContext(circle, mainContext) {
+				mainContext.globalAlpha = circle.globalAlpha;
+				mainContext.beginPath();
+				mainContext.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
+				mainContext.fillStyle = circle.fillStyle;
+				mainContext.fill();
+				mainContext.lineWidth = circle.borderWidth;
+			}
+
+			////////Draw four coloured circles in mainCanvas
+			/*var blueCircle = {
+				x: 770,
+				y: 370,
+				radius: 100,
+				fillStyle: '#c1e5f9',
+				globalAlpha: 0.5
+			};
+			drawCircleMainContext(blueCircle, mainContext);*/
+
+			/*var greenCircle = {
+				x: 600,
+				y: 200,
+				radius: 100,
+				fillStyle: '#c6ec98',
+				globalAlpha: 1
+			};
+			drawCircleMainContext(greenCircle, mainContext);*/
+
+			/*var pinkCircle = {
+				x: 770,
+				y: 200,
+				radius: 100,
+				fillStyle: '#f97ab1',
+				globalAlpha: 1
+			};
+			drawCircleMainContext(pinkCircle, mainContext);*/
+
+			/*var yellowCircle = {
+				x: 600,
+				y: 370,
+				radius: 100,
+				fillStyle: '#f9f37a',
+				globalAlpha: 0.5
+			};
+			drawCircleMainContext(yellowCircle, mainContext);*/
+
+
+			//////////////////////////////////////////CANVAS BLUE CIRCLE////////////////////////////////////////////////
+			function setUpBlueCircle() {
+			////Set blue circle CANVAS and CONTEXT variable hooks
+			var blueCircleCanvas = document.getElementById('blueCircleCanvas');
+			var blueCircleContext = blueCircleCanvas.getContext('2d');
+
+			////////FUNCTION - Animate to centre
+			function animate(myObject, canvas, context, startTime) {
+				// update
+				var time = (new Date()).getTime() - startTime;
+				// pixels / second^2
+				var gravity = 100;
+				myObject.x = 0.15 * gravity * Math.pow(time / 1000, 2);
+				myObject.y = myObject.y + 0.75;
+				myObject.radius = myObject.radius + 0.6;
+				if(myObject.x > 400) {
+					return false;
+				}
+				lastTime = time;
+				// clear
+				blueCircleContext.clearRect(0, 0, canvas.width, canvas.height);
+				
+				// draw
+				drawCircleBlueCircleContext(myObject, context);
+				// request new frame
+				requestAnimFrame(function() {
+					animate(myObject, canvas, context, startTime);
+				});
+			}
+
+			////////FUNCTION - Draw a circle blueCircleontext
+			function drawCircleBlueCircleContext(circle, context) {
+				blueCircleContext.globalAlpha = circle.globalAlpha;
+				blueCircleContext.beginPath();
+				blueCircleContext.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
+				blueCircleContext.fillStyle = circle.fillStyle;
+				blueCircleContext.fill();
+				blueCircleContext.lineWidth = circle.borderWidth;
+			}
+
+			///////Draw blue circle in blueCircleCanvas
+			var blueCircleTwo = {
+				x: 0,
+				y: 170,
+				radius: 1,
+				fillStyle: '#c1e5f9',
+				globalAlpha: 1
+			};
+			drawCircleBlueCircleContext(blueCircleTwo, blueCircleContext);
+
+			
+
+			// wait one second before moving circle
+			setTimeout(function() {
+				var startTime = (new Date()).getTime();
+				animate(blueCircleTwo, blueCircleCanvas, blueCircleContext, startTime);
+			}, 2000);
+			};
+
+
+
+			//////////////////////////////////////////CANVAS YELLOW CIRCLE////////////////////////////////////////////////
+			function setUpYellowCircle() {
+				////Set YELLOW circle CANVAS and CONTEXT variable hooks
+				var yellowCircleCanvas = document.getElementById('yellowCircleCanvas');
+				var yellowCircleContext = yellowCircleCanvas.getContext('2d');
+
+				////////FUNCTION - Animate to centre
+				function animate(myObject, canvas, context, startTime) {
+					// update
+					var time = (new Date()).getTime() - startTime;
+
+					myObject.radius = myObject.radius - 18;
+					myObject.y = myObject.y - 5.1;
+					if(myObject.radius < 120) {
+						return false;
+					}
+					lastTime = time;
+					// clear
+					yellowCircleContext.clearRect(0, 0, canvas.width, canvas.height);
+					
+					// draw
+					drawCircleyellowCircleContext(myObject, context);
+					// request new frame
+					requestAnimFrame(function() {
+						animate(myObject, canvas, context, startTime);
+					});
+				}
+
+				////////FUNCTION - Draw a circle yellowCircleontext
+				function drawCircleyellowCircleContext(circle, context) {
+					yellowCircleContext.globalAlpha = circle.globalAlpha;
+					yellowCircleContext.beginPath();
+					yellowCircleContext.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
+					yellowCircleContext.fillStyle = circle.fillStyle;
+					yellowCircleContext.fill();
+					yellowCircleContext.lineWidth = circle.borderWidth;
+				}
+
+				///////Draw yellow circle in yellowCircleCanvas
+				var yellowCircleTwo = {
+					x: 600,
+					y: 700,
+					radius: 1300,
+					fillStyle: '#f9f37a',
+					globalAlpha: 1
+				};
+				drawCircleyellowCircleContext(yellowCircleTwo, yellowCircleContext);
+
+				// wait one second before moving circle
+				setTimeout(function() {
+					var startTime = (new Date()).getTime();
+					animate(yellowCircleTwo, yellowCircleCanvas, yellowCircleContext, startTime);
+				}, 1500);
+			};
+
+
+			//////////////////////////////////////////CANVAS PINK CIRCLE////////////////////////////////////////////////
+			function setUpPinkCircle() {
+				////Set PINK circle CANVAS and CONTEXT variable hooks
+				var pinkCircleCanvas = document.getElementById('pinkCircleCanvas');
+				var pinkCircleContext = pinkCircleCanvas.getContext('2d');
+
+				////////FUNCTION - Animate to centre
+				function animate(myObject, canvas, context, startTime) {
+					// update
+					var time = (new Date()).getTime() - startTime;
+					// pixels / second^2
+					var gravity = 115;
+					myObject.x = 0.15 * gravity * Math.pow(time / 1000, 2);
+					if(myObject.x > 680) {
+						return false;
+					}
+					lastTime = time;
+					// clear
+					pinkCircleContext.clearRect(0, 0, canvas.width, canvas.height);
+					
+					// draw
+					drawCirclepinkCircleContext(myObject, context);
+					// request new frame
+					requestAnimFrame(function() {
+						animate(myObject, canvas, context, startTime);
+					});
+				}
+
+				////////FUNCTION - Draw a circle pinkCircleontext
+				function drawCirclepinkCircleContext(circle, context) {
+					pinkCircleContext.globalAlpha = circle.globalAlpha;
+					pinkCircleContext.beginPath();
+					pinkCircleContext.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
+					pinkCircleContext.fillStyle = circle.fillStyle;
+					pinkCircleContext.fill();
+					pinkCircleContext.lineWidth = circle.borderWidth;
+				}
+
+				///////Draw pink circle in pinkCircleCanvas
+				var pinkCircleTwo = {
+					x: 0,
+					y: 100,
+					radius: 40,
+					fillStyle: '#f97ab1',
+					globalAlpha: 1
+				};
+				drawCirclepinkCircleContext(pinkCircleTwo, pinkCircleContext);
+
+				// wait one second before moving circle
+				setTimeout(function() {
+					var startTime = (new Date()).getTime();
+					animate(pinkCircleTwo, pinkCircleCanvas, pinkCircleContext, startTime);
+				}, 500);
+			};
+
+
+			//////////////////////////////////////////CANVAS GREEN CIRCLE////////////////////////////////////////////////
+			function setUpGreenCircle() {
+				////Set GREEN circle CANVAS and CONTEXT variable hooks
+				var greenCircleCanvas = document.getElementById('greenCircleCanvas');
+				var greenCircleContext = greenCircleCanvas.getContext('2d');
+
+				////////FUNCTION - Animate to centre
+				function animate(myObject, canvas, context, startTime) {
+					// update
+					var time = (new Date()).getTime() - startTime;
+					
+					myObject.radius = myObject.radius + 0.1;
+
+					if(myObject.radius > 70) {
+						return false;
+					}
+					lastTime = time;
+					// clear
+					greenCircleContext.clearRect(0, 0, canvas.width, canvas.height);
+					
+					// draw
+					drawCirclegreenCircleContext(myObject, context);
+					// request new frame
+					requestAnimFrame(function() {
+						animate(myObject, canvas, context, startTime);
+					});
+				}
+
+				////////FUNCTION - Draw a circle greenCircleontext
+				function drawCirclegreenCircleContext(circle, context) {
+					greenCircleContext.globalAlpha = circle.globalAlpha;
+					greenCircleContext.beginPath();
+					greenCircleContext.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
+					greenCircleContext.fillStyle = circle.fillStyle;
+					greenCircleContext.fill();
+					greenCircleContext.lineWidth = circle.borderWidth;
+				}
+
+				///////Draw green circle in greenCircleCanvas
+				var greenCircleTwo = {
+					x: 700,
+					y: 220,
+					radius: 20,
+					fillStyle: '#c6ec98',
+					globalAlpha: 1
+				};
+				drawCirclegreenCircleContext(greenCircleTwo, greenCircleContext);
+
+				// wait one second before moving circle
+				setTimeout(function() {
+					var startTime = (new Date()).getTime();
+					animate(greenCircleTwo, greenCircleCanvas, greenCircleContext, startTime);
+				}, 500);
+			};
+
+
+			//////////////////////////////////////////CANVAS BLACK CIRCLE////////////////////////////////////////////////
+			function setUpBlackCircle() {
+				////Set BLACK circle CANVAS and CONTEXT variable hooks
+				var blackCircleCanvas = document.getElementById('blackCircleCanvas');
+				var blackCircleContext = blackCircleCanvas.getContext('2d');
+
+				////////FUNCTION - Animate to centre
+				function animate(myObject, canvas, context, startTime) {
+					// update
+					var time = (new Date()).getTime() - startTime;
+					
+					myObject.radius = myObject.radius + 0.9;
+
+					if(myObject.radius > 400) {
+						return false;
+					}
+					lastTime = time;
+					// clear
+					blackCircleContext.clearRect(0, 0, canvas.width, canvas.height);
+					
+					// draw
+					drawCircleblackCircleContext(myObject, context);
+					// request new frame
+					requestAnimFrame(function() {
+						animate(myObject, canvas, context, startTime);
+					});
+				}
+
+				////////FUNCTION - Draw a circle blackCircleontext
+				function drawCircleblackCircleContext(circle, context) {
+					blackCircleContext.globalAlpha = circle.globalAlpha;
+					blackCircleContext.beginPath();
+					blackCircleContext.arc(circle.x, circle.y, circle.radius, 0, 2 * Math.PI, false);
+					blackCircleContext.fillStyle = circle.fillStyle;
+					blackCircleContext.fill();
+					blackCircleContext.lineWidth = circle.borderWidth;
+				}
+
+				///////Draw black circle in blackCircleCanvas
+				var blackCircleTwo = {
+					x: 0,
+					y: 150,
+					radius: 20,
+					fillStyle: '#000000',
+					globalAlpha: 1
+				};
+				drawCircleblackCircleContext(blackCircleTwo, blackCircleContext);
+
+				// wait one second before moving circle
+				setTimeout(function() {
+					var startTime = (new Date()).getTime();
+					animate(blackCircleTwo, blackCircleCanvas, blackCircleContext, startTime);
+				}, 500);
+			};
+
+
+
+			
+			setUpGreenCircle();
+			setUpPinkCircle();
+			setUpYellowCircle();
+			setUpBlueCircle();
+			setUpBlackCircle();
+		</script>
+	
+	</body>
+</html>
